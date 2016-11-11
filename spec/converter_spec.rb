@@ -1,9 +1,9 @@
 require 'converter'
 
-Rspec.describe Converter do
+RSpec.describe Converter do
 
   it "pish tegj glob glob is 52" do
-
+    expect(subject.convert("pish tegj glob glob")).to eq(52)
   end
 
   it "glob prok silver is 68 credits" do
