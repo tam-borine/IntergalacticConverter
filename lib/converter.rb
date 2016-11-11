@@ -8,7 +8,8 @@ ORE_CREDIT = { silver: 17, gold: 14450, iron: 195}
 
   def convert(input_currency)
     input_currency = toArrayOfStrings(input_currency)
-    correctLookUp(input_currency)
+    values, multiplier = correctLookUp(input_currency)
+    return values.inject(:+) * multiplier
     # check validity of input or raiseerror
 
   end
@@ -17,6 +18,7 @@ ORE_CREDIT = { silver: 17, gold: 14450, iron: 195}
 
   def correctLookUp(input_currency)
     values = []
+    multiplier = 0
     input_currency.each do |word|
       word = word.to_sym
       if NUMERAL_GALAX.keys.include?(word)
@@ -25,11 +27,11 @@ ORE_CREDIT = { silver: 17, gold: 14450, iron: 195}
         values << NUMERAL_CREDIT[NUMERAL_GALAX[word]]
       elsif
         p "SECOND CALLED"
-        values << ORE_CREDIT[word]
+        multiplier += ORE_CREDIT[word]
       else
       end
     end
-    return values
+    return values, multiplier
   end
 
   def toArrayOfStrings(string)
