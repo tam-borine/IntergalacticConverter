@@ -1,6 +1,7 @@
 require 'converter'
 
 RSpec.describe Converter do
+subject {described_class.new}
 
   it "pish tegj glob glob is 52" do
     expect(subject.convert("pish tegj glob glob")).to eq("52")
