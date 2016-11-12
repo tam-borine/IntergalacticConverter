@@ -20,7 +20,7 @@ subject {described_class.new}
   end
 
   it "raises error for invalid input" do
-    expect{subject.convert(nil)}.to raise "I have no idea what you are talking about"
+    expect{subject.convert(nil)}.to raise_error "I have no idea what you are talking about"
 
   end
 

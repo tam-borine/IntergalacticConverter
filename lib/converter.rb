@@ -7,14 +7,34 @@ ORE_CREDIT = { silver: 17.0, gold: 14450.0, iron: 195.5}
 #show the algebra that gave these values
 
   def convert(input_currency)
-    input_currency = toArrayOfStrings(input_currency)
-    credits, multiplier = correctLookUp(input_currency)
-    return credits * (multiplier != 0 ? multiplier : 1)
+    if input_currency && validInput?(input_currency)
+      input_currency = toArrayOfStrings(input_currency)
+      credits, multiplier = correctLookUp(input_currency)
+      return credits * (multiplier != 0 ? multiplier : 1)
+    else
+      raise "I have no idea what you are talking about"
+    end
     # check validity of input or raiseerror
 
   end
 
   private
+
+  def validInput?(input)
+    truthy = nil
+    input = toArrayOfStrings(input)
+    input.each do |word|
+      p word
+      # isValid = xor(NUMERAL_GALAX.keys.include?(word), ORE_CREDIT.keys.include?(word))
+      truthy = NUMERAL_GALAX.keys.include?(word.to_sym) || ORE_CREDIT.keys.include?(word.to_sym)
+      p truthy
+    end
+    truthy
+  end
+
+  def xor(a,b)
+  (a and (not b)) or ((not a) and b)
+end
 
   def correctLookUp(input_currency)
     romanValue = ""
