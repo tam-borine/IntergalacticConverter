@@ -25,7 +25,7 @@ ORE_CREDIT = { silver: 17.0, gold: 14450.0, iron: 195.5}
     end
     return truthy
   end
-  
+
   def correctLookUp(input_currency)
     romanValue = ""
     credits = 0
@@ -44,14 +44,14 @@ ORE_CREDIT = { silver: 17.0, gold: 14450.0, iron: 195.5}
     return credits, multiplier
   end
 
-  def roman_to_integer(str)
+  def roman_to_integer(str) #"XLI"
   	total = 0
   	left = 0
-  	index = str.length - 1
-  	while index >= 0
-  		key = str[index]
-  		index -= 1
-  		val = NUMERAL_CREDIT[key.to_sym]
+    str = str
+  	while str.length > 0 # index >= 0 #
+  		key = str[-1]
+  		val = NUMERAL_CREDIT[key.to_sym] #
+      str = str.chop
   		if val < left  #this deals with the new roman numeral form
   			val *= -1
   		else
