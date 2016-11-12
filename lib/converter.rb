@@ -9,9 +9,6 @@ ORE_CREDIT = { silver: 17.0, gold: 14450.0, iron: 195.5}
   def convert(input_currency)
     input_currency = toArrayOfStrings(input_currency)
     credits, multiplier = correctLookUp(input_currency)
-    p "credits then multiplier below!"
-    p credits
-    p multiplier
     return credits * (multiplier != 0 ? multiplier : 1)
     # check validity of input or raiseerror
 
@@ -26,13 +23,10 @@ ORE_CREDIT = { silver: 17.0, gold: 14450.0, iron: 195.5}
     input_currency.each do |word| #[glob, prok, silver]
       word = word.to_sym
       if NUMERAL_GALAX.keys.include?(word)
-        p "FIRST CALLED"
         romanValue << NUMERAL_GALAX[word]
         credits = roman_to_integer(romanValue)
-        p romanValue
         # romanValue = ""
       elsif
-        p "SECOND CALLED"
         multiplier += ORE_CREDIT[word]
       else
       end
