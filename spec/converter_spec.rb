@@ -34,7 +34,7 @@ subject {described_class.new}
 
     it "raises error for invalid input"
     it "inputs are queries if include substring 'how[much/many]'"
-    
+
     it "inputs are info (thus passed to updateGivens) if include substring 'is' and mention at least 2 different currencies" do
     end
 

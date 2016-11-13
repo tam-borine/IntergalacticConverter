@@ -1,4 +1,4 @@
-require_relative './converter.rb'
+require_relative './lib/converter.rb'
 
 def readArgv(argv_text_file)
   text = []
