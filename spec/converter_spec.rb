@@ -33,14 +33,18 @@ subject {described_class.new}
     end
 
     it "raises error for invalid input"
-    it "creates a new query for inputs with substring 'how[much/many]'"
-    it "creates a new info note for inputs with substring 'is' and which mention at least 2 different currencies"
+    it "inputs are queries if include substring 'how[much/many]'"
+    
+    it "inputs are info (thus passed to updateGivens) if include substring 'is' and mention at least 2 different currencies" do
+    end
+
     it "updates default conversion hash maps with new information" do
       pending "test passes but need to keep pending until I decide what default values should be"
       expect(hashDoesIncludeValueAtKey(described_class::NUMERAL_GALAX, :glob, "I")).to be false
       subject.send(:updateGivens, :glob, "I")
       expect(hashDoesIncludeValueAtKey(described_class::NUMERAL_GALAX, :glob, "I")).to be true
     end
+
     it "does algebra"
   end
 
