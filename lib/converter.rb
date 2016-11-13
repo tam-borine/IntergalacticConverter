@@ -48,9 +48,9 @@ ORE_CREDIT = { silver: 17.0, gold: 14450.0, iron: 195.5}
   	total = 0
   	left = 0
     str = str
-  	while str.length > 0 # index >= 0 #
+  	while str.length > 0
   		key = str[-1]
-  		val = NUMERAL_CREDIT[key.to_sym] #
+  		val = NUMERAL_CREDIT[key.to_sym]
       str = str.chop
   		if val < left  #this deals with the new roman numeral form
   			val *= -1
