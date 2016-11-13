@@ -27,11 +27,14 @@ subject {described_class.new}
   end
 
   describe "#roman_to_integer" do
+
     it "old roman numerals are simply translated and summed" do
       expect(subject.send(:roman_to_integer,"MMVI")).to eq(2006)
     end
 
-    it "new roman numerals are calculated correctly"
+    it "new roman numerals are calculated correctly" do
+      expect(subject.send(:roman_to_integer, "MMIV")).to eq(2004)
+    end
 
     it "D, L, and V can never repeat"
 
