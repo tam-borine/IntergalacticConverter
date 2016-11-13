@@ -2,7 +2,7 @@ require_relative './converter.rb'
 
 def readArgv(argv_text_file)
   text = []
-  File.read("JAN\nFEB\nMAR\nAPR\nMAY").each_line do |line|
+  File.read(argv_text_file).each_line do |line|
     text << line.chop
   end
   return text
@@ -14,5 +14,5 @@ end
 
 if $0 == __FILE__
   input = readArgv(ARGV[0])
-  giveInputToConverter(input)
+  p giveInputToConverter(input)
 end

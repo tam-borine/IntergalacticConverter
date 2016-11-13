@@ -9,6 +9,10 @@ CURRENCY_MAPS = [NUMERAL_GALAX, NUMERAL_CREDIT, ORE_CREDIT]
 
 #show the algebra that gave these values
 
+  def initialize(argv_text_file)
+    @info = argv_text_file
+  end
+
   def convert(input_currency)
     raise "I have no idea what you are talking about" unless input_currency && validInput?(input_currency)
       input_currency = toArrayOfStrings(input_currency)
