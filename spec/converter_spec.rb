@@ -1,7 +1,11 @@
 require 'converter'
 
 RSpec.describe Converter do
-subject {described_class.new}
+let(:text_file){"pish pish Iron is 3910 Credits \n
+how much is pish tegj glob glob ? \n
+how many Credits is glob prok Silver ?"}
+
+subject {described_class.new(text_file)}
 
   describe "feature tests" do
 
@@ -36,6 +40,7 @@ subject {described_class.new}
     it "inputs are queries if include substring 'how[much/many]'"
 
     it "inputs are info (thus passed to updateGivens) if include substring 'is' and mention at least 2 different currencies" do
+      expect(subject.isInfo?("pish pish Iron is 3910 Credits")).to eq true
     end
 
     it "updates default conversion hash maps with new information" do
