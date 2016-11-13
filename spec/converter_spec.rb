@@ -40,7 +40,7 @@ subject {described_class.new(text_file)}
     it "inputs are queries if include substring 'how[much/many]'"
 
     it "inputs are info (thus passed to updateGivens) if include substring 'is' and mention at least 2 different currencies" do
-      expect(subject.isInfo?("pish pish Iron is 3910 Credits")).to eq true
+      expect(subject.send(:isInfo?, "pish pish Iron is 3910 Credits")).to eq true
     end
 
     it "updates default conversion hash maps with new information" do

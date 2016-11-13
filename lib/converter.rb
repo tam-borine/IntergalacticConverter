@@ -33,6 +33,13 @@ CURRENCY_MAPS = [NUMERAL_GALAX, NUMERAL_CREDIT, ORE_CREDIT]
     return truthy
   end
 
+  def isInfo?(str)
+    return true if /is/.match(str) && (CURRENCY_MAPS.each do |hash|
+      hash.keys.include?(str)
+    end)
+    # and mentioned at least 2 keys
+  end
+
   def updateGivens(key, value)
     CURRENCY_MAPS.each do |hash|
       hash[key] = value if hash.keys.include?(key)
