@@ -26,14 +26,23 @@ subject {described_class.new}
     end
   end
 
+  describe "interface" do
+    it "raises error for invalid input"
+    it "creates a new query for inputs with substring 'how[much/many]'"
+    it "creates a new info note for inputs with substring 'is' and which mention at least 2 different currencies"
+    it "updates default conversion hash maps with new information"
+  end
+
   describe "#roman_to_integer" do
 
     it "old roman numerals are simply translated and summed" do
       expect(subject.send(:roman_to_integer,"MMVI")).to eq(2006)
+      #add more cases here
     end
 
     it "new roman numerals are calculated correctly" do
       expect(subject.send(:roman_to_integer, "MMIV")).to eq(2004)
+      #add more cases here
     end
 
     it "D, L, and V can never repeat"
