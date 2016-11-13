@@ -27,10 +27,20 @@ subject {described_class.new}
   end
 
   describe "interface" do
+
+    def hashDoesIncludeValueAtKey(hash, key, value)
+      hash.any? {|k, v| k == key && v == value}
+    end
+
     it "raises error for invalid input"
     it "creates a new query for inputs with substring 'how[much/many]'"
     it "creates a new info note for inputs with substring 'is' and which mention at least 2 different currencies"
-    it "updates default conversion hash maps with new information"
+    it "updates default conversion hash maps with new information" do
+      expect(hashDoesIncludeValueAtKey(described_class::NUMERAL_GALAX, :glob, "I")).to be false
+      subject.updateGivens(:glob, "I")
+      expect(hashDoesIncludeValueAtKey(described_class::NUMERAL_GALAX, :glob, "I")).to be true
+    end
+    it "does algebra"
   end
 
   describe "#roman_to_integer" do
@@ -46,17 +56,11 @@ subject {described_class.new}
     end
 
     it "D, L, and V can never repeat"
-
     it "I, X, C, and M can repeat three times max in succession"
-
     it "I, X, C, and M can repeat four times if succession is broken by another symbol"
-
     it "I can be subtracted from V and X only"
-
     it "X can be subtracted from L and C only"
-
     it "C can be subtracted from D and M only"
-
     it "V, L and D can never be subtracted"
 
 
