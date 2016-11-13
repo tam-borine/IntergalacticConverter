@@ -29,6 +29,13 @@ CURRENCY_MAPS = [NUMERAL_GALAX, NUMERAL_CREDIT, ORE_CREDIT]
     return truthy
   end
 
+  def updateGivens(key, value)
+    CURRENCY_MAPS.each do |hash|
+      hash[key] = value if hash.keys.include?(key)
+    end
+  end
+
+
   def correctLookUp(input_currency)
     romanValue = ""
     credits = 0

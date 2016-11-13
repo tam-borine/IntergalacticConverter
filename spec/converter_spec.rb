@@ -37,7 +37,7 @@ subject {described_class.new}
     it "creates a new info note for inputs with substring 'is' and which mention at least 2 different currencies"
     it "updates default conversion hash maps with new information" do
       expect(hashDoesIncludeValueAtKey(described_class::NUMERAL_GALAX, :glob, "I")).to be false
-      subject.updateGivens(:glob, "I")
+      subject.send(:updateGivens, :glob, "I")
       expect(hashDoesIncludeValueAtKey(described_class::NUMERAL_GALAX, :glob, "I")).to be true
     end
     it "does algebra"
