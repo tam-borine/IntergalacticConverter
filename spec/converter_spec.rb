@@ -1,6 +1,7 @@
 require 'converter'
 
 RSpec.describe Converter do
+  
 let(:text_file){"pish pish Iron is 3910 Credits \n
 how much is pish tegj glob glob ? \n
 how many Credits is glob prok Silver ?"}
