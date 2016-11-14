@@ -14,8 +14,8 @@ module Interpreter
 
   def validInput?(input_array)
     input_array.each do |word|
-      return false unless (Currencies::NUMERAL_GALAX.keys.include?(word.to_sym) ||
-      Currencies::ORE_CREDIT.keys.include?(word.to_sym))
+      return false unless (Currencies::NUMERAL_GALAX.keys.include?(word) ||
+      Currencies::ORE_CREDIT.keys.include?(word))
     end
     return true
   end
