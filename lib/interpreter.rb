@@ -12,14 +12,12 @@ module Interpreter
     /how \b(many|much)\b/.match(str) ? true : false
   end
 
-  def validInput?(input)
-    # truthy = nil
-    # input = toArrayOfStrings(input)
-    input.each do |word|
-      return false unless (Currencies::NUMERAL_GALAX.keys.include?(word.to_sym) || Currencies::ORE_CREDIT.keys.include?(word.to_sym))
+  def validInput?(input_array)
+    input_array.each do |word|
+      return false unless (Currencies::NUMERAL_GALAX.keys.include?(word.to_sym) ||
+      Currencies::ORE_CREDIT.keys.include?(word.to_sym))
     end
     return true
-    #refactor this loop so similar to above?
   end
 
 end
