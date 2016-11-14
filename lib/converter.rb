@@ -9,7 +9,7 @@ include Currencies
   end
 
   def convert(input_currency)
-    raise "I have no idea what you are talking about" unless input_currency && validInput?(input_currency)
+    raise "I have no idea what you are talking about" unless input_currency
       input_currency = toArrayOfStrings(input_currency)
       credits, multiplier = correctLookUp(input_currency)
       return credits * (multiplier != 0 ? multiplier : 1)
@@ -18,15 +18,6 @@ include Currencies
   end
 
   private
-
-  def validInput?(input)
-    truthy = nil
-    input = toArrayOfStrings(input)
-    input.each do |word|
-      truthy = NUMERAL_GALAX.keys.include?(word.to_sym) || ORE_CREDIT.keys.include?(word.to_sym)
-    end
-    return truthy
-  end
 
   def updateGivens(key, value)
     CURRENCY_MAPS.each do |hash|
