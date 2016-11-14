@@ -11,13 +11,14 @@ RSpec.describe Interpreter do
 
     it "inputs are queries if include substr 'how[much/many]'" do
       expect(interpreter.isQuery?("pish pish Iron is 3910 Credits")).to eq false
+      expect(interpreter.isQuery?("how much is pish tegj glob glob ?")).to eq true
       expect(interpreter.isQuery?("how many Credits is glob prok Gold ?")).to eq true
     end
 
     it "inputs are info if include substr 'is' and mention >= 2 different currencies" do
       expect(interpreter.isInfo?("pish pish Iron is 3910 Credits")).to eq true
       expect(interpreter.isInfo?("pish is glob")).to eq false
-      #add edge case for DIFFERENT currencies
+      expect(interpreter.isInfo?("glob is I")).to eq true
     end
 
     it "does algebra"

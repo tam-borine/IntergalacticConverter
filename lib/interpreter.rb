@@ -4,7 +4,7 @@ module Interpreter
 
   def isInfo?(str)
     hash_names = getMentionedCurrencies(str)
-    return true if /is/.match(str)    && currenciesMentionedAreFromDifferentMaps(hash_names)
+    return true if /is/.match(str) && currenciesMentionedAreFromDifferentMaps(hash_names)
     return false
   end
 
@@ -28,18 +28,10 @@ module Interpreter
     end
     return hash_names
   end
-#h.fetch( h.keys.find{|key|s[key]} )
+
   def currenciesMentionedAreFromDifferentMaps(hash_names)
-  #   hash_names.each do |name| name
-    p hash_names
+    # p hash_names
     hash_names.uniq.length > 1
   end
 
-
-
 end
-#(Currencies::CURRENCY_MAPS.each do |hash|  hash.keys.include?(str)    end)
-
-
-#return true if 2 different currencies are mentioned
-#str[Regexp.union(hash.keys.to_s)]
