@@ -7,6 +7,8 @@ RSpec.describe Interpreter do
     it "raises error for invalid input" do
       expect(interpreter.validInput?(["prok", "glob"])).to eq true
       expect(interpreter.validInput?(["cheese", "prok", "glob"])).to eq false
+      expect(interpreter.validInput?(["how much garbage is in garbage?"])).to eq false
+
     end
 
     it "inputs are queries if include substr 'how[much/many]'" do
@@ -19,6 +21,10 @@ RSpec.describe Interpreter do
       expect(interpreter.isInfo?("pish pish Iron is 3910 Credits")).to eq true
       expect(interpreter.isInfo?("pish is glob")).to eq false
       expect(interpreter.isInfo?("glob is I")).to eq true
+    end
+
+    it "splits line into subjects and objects on 'is'" do
+
     end
 
     it "does algebra"

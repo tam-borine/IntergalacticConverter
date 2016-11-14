@@ -1,7 +1,7 @@
 require 'converter'
 
 RSpec.describe Converter do
-  
+
 let(:text_file){"pish pish Iron is 3910 Credits \n
 how much is pish tegj glob glob ? \n
 how many Credits is glob prok Silver ?"}
@@ -27,7 +27,7 @@ subject {described_class.new(text_file)}
     end
 
     it "raises error for invalid input" do
-      expect{subject.convert(nil)}.to raise_error "I have no idea what you are talking about"
+      expect{subject.convert(nil)}.to raise_error "I have no idea what yo are talking about"
     end
   end
 

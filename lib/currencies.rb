@@ -16,10 +16,3 @@ module Currencies #understands the translatory currency maps and how to update t
   end
 
 end
-
-
-"glob is prok"
-
-"glob is V"
-
-#names of hashes do not match

@@ -12,4 +12,5 @@ RSpec.describe Currencies do
     subject.send(:updateGivens, :glob, "I")
     expect(hashDoesIncludeValueAtKey(described_class::NUMERAL_GALAX, :glob, "I")).to be true
   end
+  
 end

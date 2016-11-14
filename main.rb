@@ -1,4 +1,5 @@
 require_relative './lib/converter.rb'
+#responsible for reading the input file from CL and instantiating converter with input
 
 def readArgv(argv_text_file)
   text = []
