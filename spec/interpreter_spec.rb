@@ -1,7 +1,6 @@
 require 'interpreter'
 
 RSpec.describe "interpreter" do
-  describe "interpreter" do
 
     it "raises error for invalid input"
     it "inputs are queries if include substring 'how[much/many]'"
@@ -12,5 +11,5 @@ RSpec.describe "interpreter" do
     end
 
     it "does algebra"
-  end
+  
 end
