@@ -5,5 +5,11 @@ module Currencies
   ORE_CREDIT = { silver: 17.0, gold: 14450.0, iron: 195.5}
 
   CURRENCY_MAPS = [NUMERAL_GALAX, NUMERAL_CREDIT, ORE_CREDIT]
-  
+
+  def updateGivens(key, value)
+    CURRENCY_MAPS.each do |hash|
+      hash[key] = value if hash.keys.include?(key)
+    end
+  end
+
 end
