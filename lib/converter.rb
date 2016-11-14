@@ -25,7 +25,6 @@ include Currencies
     credits = 0
     multiplier = 0
     input_currency.each do |word| #[glob, prok, silver]
-      word = word.to_sym
       if Currencies::NUMERAL_GALAX.keys.include?(word)
         romanValue << Currencies::NUMERAL_GALAX[word]
         credits = roman_to_integer(romanValue)
@@ -44,7 +43,7 @@ include Currencies
     str = str
   	while str.length > 0
   		key = str[-1]
-  		val = Currencies::NUMERAL_CREDIT[key.to_sym]
+  		val = Currencies::NUMERAL_CREDIT[key]
       str = str.chop
   		if val < left  #this deals with the new roman numeral form
   			val *= -1
