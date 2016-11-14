@@ -1,12 +1,7 @@
+require_relative './currencies.rb'
+
 class Converter
-
-#default givens
-NUMERAL_GALAX = { glob: "I", prok: "V", pish: "X", tegj: "L"}
-NUMERAL_CREDIT = { I: 1.0, V: 5.0, X: 10.0, L: 50.0, C: 100.0, D: 500.0, M: 1000.0}
-ORE_CREDIT = { silver: 17.0, gold: 14450.0, iron: 195.5}
-
-CURRENCY_MAPS = [NUMERAL_GALAX, NUMERAL_CREDIT, ORE_CREDIT]
-
+include Currencies
 #show the algebra that gave these values
 
   def initialize(argv_text_file)
@@ -31,13 +26,6 @@ CURRENCY_MAPS = [NUMERAL_GALAX, NUMERAL_CREDIT, ORE_CREDIT]
       truthy = NUMERAL_GALAX.keys.include?(word.to_sym) || ORE_CREDIT.keys.include?(word.to_sym)
     end
     return truthy
-  end
-
-  def isInfo?(str)
-    return true if /is/.match(str) && (CURRENCY_MAPS.each do |hash|
-      hash.keys.include?(str)
-    end)
-    # and mentioned at least 2 keys
   end
 
   def updateGivens(key, value)
