@@ -39,7 +39,6 @@ include Currencies
   end
 
   def roman_to_integer(str) #"XLI"
-    p str
   	total = 0
   	left = 0
     str = str

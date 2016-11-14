@@ -7,6 +7,10 @@ module Interpreter
     end)
   end
 
+  def isQuery?(str)
+    /how \b(many|much)\b/.match(str) ? true : false
+  end
+
   def validInput?(input)
     truthy = nil
     # input = toArrayOfStrings(input)
