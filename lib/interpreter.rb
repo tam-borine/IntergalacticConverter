@@ -30,12 +30,15 @@ module Interpreter #responsible for understanding the type of input
              hash[word]
            else
              unknown = subject.delete(word)
+             p unknown
+
            end
         end
       end
     end
     # do algebra for unknowns
     Currencies.updateGivens(unknown,derived_value)
+    return getMentionedCurrencies(unknown)
   end
 
   def isInfo?(str)
