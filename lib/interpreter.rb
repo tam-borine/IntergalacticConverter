@@ -19,10 +19,23 @@ module Interpreter #responsible for understanding the type of input
   def solveForUnknownInfo(info_combo)
     #seperate into subjects and objects
     subjects, objects = getSubjectsAndObjects(info_combo)
-    # p subjects, objects
     #decompose and look up values in currencies
+    unknown = nil
+    derived_value = "rand"
+    subjects.each do |subject|
+      subject.split.map do |word|
+
+        Currencies::CURRENCY_MAPS.each do |hash|
+           if hash.keys.any? {|key| word.match(key)}
+             hash[word]
+           else
+             unknown = subject.delete(word)
+           end
+        end
+      end
+    end
     # do algebra for unknowns
-    Currencies.updateGivens(key,derived_value)
+    Currencies.updateGivens(unknown,derived_value)
   end
 
   def isInfo?(str)
@@ -46,12 +59,9 @@ module Interpreter #responsible for understanding the type of input
   private
 
   def getSubjectsAndObjects(info_combo)
-    subjects = []
-    objects = []
+    subjects, objects = [], []
     info_combo.each do |info_str|
-      print info_str
       subjectsAndObjects = info_str.split(/\bis\b/)
-      print subjectsAndObjects
       subjects << subjectsAndObjects[0]
       objects << subjectsAndObjects[1]
     end
