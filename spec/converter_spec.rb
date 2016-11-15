@@ -11,23 +11,23 @@ subject {described_class.new(text_file)}
   describe "feature tests" do
 
     it "pish tegj glob glob is 42" do
-      expect(subject.convert("pish tegj glob glob")).to eq(42.0)
+      expect(subject.convertToCredits("pish tegj glob glob")).to eq(42.0)
     end
 
     it "glob prok silver is 68 credits" do
-      expect(subject.convert("glob prok silver")).to eq(68)
+      expect(subject.convertToCredits("glob prok silver")).to eq(68)
     end
 
     it "glob prok gold is 57800 credits" do
-      expect(subject.convert("glob prok gold")).to eq(57800)
+      expect(subject.convertToCredits("glob prok gold")).to eq(57800)
     end
 
     it "glob prok iron is 782 credits" do
-      expect(subject.convert("glob prok iron")).to eq(782)
+      expect(subject.convertToCredits("glob prok iron")).to eq(782)
     end
 
-    it "raises error for invalid input" do
-      expect{subject.convert(nil)}.to raise_error "I have no idea what yo are talking about"
+    it "raises error for falsey input" do
+      expect{subject.convertToCredits(nil)}.to raise_error "I have no idea what you are talking about"
     end
   end
 

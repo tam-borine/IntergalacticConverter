@@ -4,15 +4,18 @@ module Interpreter #responsible for understanding the type of input
 
   #order of checks should be: validInput? isQuery? isInfo?
 
-  def decomposeQueries(queries) #["query". "another query"]
-    subjects, objects = [], []
-    #for each query
-    prefix = /how \b(many|much)\b/.match(str)
-    #chop off prefix
-    sAndO = query.split("is")
-    subjects << sAndO[0]
-    objects << sAndO[1]
-    return subjects, objects
+  def getSubjectFromQueries(queries) #["query". "another query"]
+    subjects = []
+    queries.each do |query|
+      prefix = query[/how \b(many|much)\b/, 1]
+      # prefix = /how \b(many|much)\b/.match(query)
+      p prefix
+      query.slice!(prefix)
+      subjectsAndObjects = query.split("is")
+      subjects << subjectsAndObjects[0]
+    end
+    # objects << sAndO[1]
+    return subjects
   end
 
   def isInfo?(str)

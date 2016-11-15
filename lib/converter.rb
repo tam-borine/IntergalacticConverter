@@ -8,18 +8,14 @@ include Currencies
     @info = argv_text_file
   end
 
-  def convert(input_currency)
+  def convertToCredits(input_currency)#"glob prok silver"
     raise "I have no idea what you are talking about" unless input_currency
       input_currency = toArrayOfStrings(input_currency)
       credits, multiplier = correctLookUp(input_currency)
       return credits * (multiplier != 0 ? multiplier : 1)
-    # check validity of input or raiseerror
-
   end
 
   private
-
-
   def correctLookUp(input_currency)
     romanValue = ""
     credits = 0
