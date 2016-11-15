@@ -29,7 +29,7 @@ RSpec.describe Interpreter do
     end
 
     it "does algebra" do
-      info_combo = ["glob glob Silver is 34 Credits", "glob prok Gold is 57800 Credits", "pish pish Iron is 3910 Credits"]
+      info_combo = ["glob glob Silver is 34 Credits","pish pish Iron is 3910 Credits","glob prok Gold is 57800 Credits"]
       expect(interpreter.solveForUnknownInfo(info_combo)).to eq Currencies::ORE_CREDIT
     end
 

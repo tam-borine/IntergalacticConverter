@@ -18,12 +18,8 @@ module Interpreter #responsible for understanding the type of input
 
   def solveForUnknownInfo(info_combo)
     #seperate into subjects and objects
-    subjects, objects = [], []
-    info_combo.each do |info_str|
-      subjectsAndObjects = info_str.split("is")
-      subjects << subjectsAndObjects[0]
-      objects << subjectsAndObjects[1]
-    end
+    subjects, objects = getSubjectsAndObjects(info_combo)
+    # p subjects, objects
     #decompose and look up values in currencies
     # do algebra for unknowns
     Currencies.updateGivens(key,derived_value)
@@ -48,6 +44,19 @@ module Interpreter #responsible for understanding the type of input
   end
 
   private
+
+  def getSubjectsAndObjects(info_combo)
+    subjects = []
+    objects = []
+    info_combo.each do |info_str|
+      print info_str
+      subjectsAndObjects = info_str.split(/\bis\b/)
+      print subjectsAndObjects
+      subjects << subjectsAndObjects[0]
+      objects << subjectsAndObjects[1]
+    end
+    return subjects, objects
+  end
 
   def getMentionedCurrencies(str)
     hash_names = []
