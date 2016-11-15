@@ -7,7 +7,8 @@ module Interpreter #responsible for understanding the type of input
   def getSubjectFromQueries(queries) #["query". "another query"]
     subjects = []
     queries.each do |query|
-      prefix = query[/how \b(many|much)\b/, 1]
+
+      prefix = query[/(how )(many|much) /]
       # prefix = /how \b(many|much)\b/.match(query)
       p prefix
       query.slice!(prefix)

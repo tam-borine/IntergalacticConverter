@@ -25,7 +25,7 @@ RSpec.describe Interpreter do
 
     it "splits query into subjects and objects on 'is'" do
       query = ["how many Credits is glob prok Silver ?"]
-      expect(interpreter.getSubjectFromQueries(query)).to eq ["Credits"]
+      expect(interpreter.getSubjectFromQueries(query)).to eq ["Credits "]
     end
 
 #, "how much is pish tegj glob glob ?"
