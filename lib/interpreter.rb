@@ -17,7 +17,16 @@ module Interpreter #responsible for understanding the type of input
   end
 
   def solveForUnknownInfo(info_combo)
-    info_combo
+    #seperate into subjects and objects
+    subjects, objects = [], []
+    info_combo.each do |info_str|
+      subjectsAndObjects = info_str.split("is")
+      subjects << subjectsAndObjects[0]
+      objects << subjectsAndObjects[1]
+    end
+    #decompose and look up values in currencies
+    # do algebra for unknowns
+    Currencies.updateGivens(key,derived_value)
   end
 
   def isInfo?(str)
