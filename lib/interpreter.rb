@@ -7,15 +7,12 @@ module Interpreter #responsible for understanding the type of input
   def getSubjectFromQueries(queries) #["query". "another query"]
     subjects = []
     queries.each do |query|
-
       prefix = query[/(how )(many|much) /]
-      # prefix = /how \b(many|much)\b/.match(query)
-      p prefix
       query.slice!(prefix)
+      query.chop! #this is uncool hacky way to remove  ? from str
       subjectsAndObjects = query.split("is")
-      subjects << subjectsAndObjects[0]
+      subjects << subjectsAndObjects[1]
     end
-    # objects << sAndO[1]
     return subjects
   end
 
