@@ -25,10 +25,12 @@ RSpec.describe Interpreter do
 
     it "splits query into subjects and objects on 'is'" do
       query = ["how many Credits is glob prok Silver ?"]
-       #this needs some work as the subject we want is obviously not credits...
       expect(interpreter.getSubjectFromQueries(query)).to eq [" glob prok Silver "]
     end
 
-    it "does algebra"
+    it "does algebra" do
+      info_combo = ["glob glob Silver is 34 Credits", "glob prok Gold is 57800 Credits", "pish pish Iron is 3910 Credits"]
+      expect(interpreter.solveForUnknownInfo(info_combo)).to eq Currencies::ORE_CREDIT
+    end
 
 end

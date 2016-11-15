@@ -16,6 +16,10 @@ module Interpreter #responsible for understanding the type of input
     return subjects
   end
 
+  def solveForUnknownInfo(info_combo)
+    info_combo
+  end
+
   def isInfo?(str)
     hash_names = getMentionedCurrencies(str) # "glob is prok"
     return true if /is/.match(str) && currenciesMentionedAreFromDifferentMaps(hash_names)
