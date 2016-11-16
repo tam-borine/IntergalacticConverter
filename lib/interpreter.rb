@@ -42,6 +42,13 @@ module Interpreter #responsible for understanding the type of input
     return false
   end
 
+  def is_compound_info?(str)
+    subjects = str.split(/\bis\b/)[0]
+    p subjects
+    p "above here!!"
+    is_info?(str) && subjects.split.size > 1
+  end
+
   def is_query?(str)
     /how \b(many|much)\b/.match(str) ? true : false
   end
