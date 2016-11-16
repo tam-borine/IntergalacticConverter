@@ -8,7 +8,7 @@ module Interpreter #responsible for understanding the type of input
     queries.each do |query|
       prefix = query[/(how )(many|much) /]
       query.chop!.slice!(prefix) #chop is uncool hacky way to remove  ? from str
-      currencies_to_convert << get_subjects_from_queries(query)
+      currencies_to_convert << get_substr_after_is(query)
     end
     return currencies_to_convert
   end
@@ -22,13 +22,15 @@ module Interpreter #responsible for understanding the type of input
     # derived_value = "rand"
     subjects.each do |subject|
       subject = subject.split.map! do |word|
+        p subject
+        p word
         word = replace_with_value_if_exists(word)
       end
       knowns << subject
     end
-    p knowns
-    p subjects
-    p objects
+    # p knowns
+    # p subjects
+    # p objects
     # do algebra for unknowns
     # Currencies.update_givens(unknown,derived_value)
     # return get_mentioned_currencies(unknown)
@@ -40,7 +42,7 @@ module Interpreter #responsible for understanding the type of input
   end
 
   def is_compound_info?(str)
-    subjects = get_subject_from_info(str)
+    subjects = get_substr_before_is(str)
     is_info?(str) && subjects.split.size > 1
   end
 
@@ -58,16 +60,12 @@ module Interpreter #responsible for understanding the type of input
 
   private
 
-  def get_subject_from_info(str)
+  def get_substr_before_is(str)
     str.split(/\bis\b/)[0]
   end
 
-  def get_object_from_info(str)
+  def get_substr_after_is(str)
     str.split(/\bis\b/)[1]
-  end
-
-  def get_subjects_from_queries(str)
-    str.split(/\bis\b/)[1] #repetititve code smell? rename these functions to get_substr_after/before_is
   end
 
   def replace_with_value_if_exists(word)
@@ -80,8 +78,8 @@ module Interpreter #responsible for understanding the type of input
   def get_subjects_and_objects(info_combo)
     subjects, objects = [], []
     info_combo.each do |info_str|
-      subjects << get_subject_from_info(info_str)
-      objects << get_object_from_info(info_str)
+      subjects << get_substr_before_is(info_str)
+      objects << get_substr_after_is(info_str)
     end
     return subjects, objects
   end
