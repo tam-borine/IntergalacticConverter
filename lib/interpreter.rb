@@ -7,8 +7,7 @@ module Interpreter #responsible for understanding the type of input
     currencies_to_convert = []
     queries.each do |query|
       prefix = query[/(how )(many|much) /]
-      query.slice!(prefix)
-      query.chop! #this is uncool hacky way to remove  ? from str
+      query.chop!.slice!(prefix) #chop is uncool hacky way to remove  ? from str
       currencies_to_convert << get_subjects_from_queries(query)
     end
     return currencies_to_convert
@@ -16,7 +15,7 @@ module Interpreter #responsible for understanding the type of input
 
   def solve_for_unknown_info(info_combo)
     #seperate into subjects and objects
-    subjects, objects = get_subjects_and_objects(info_combo)
+    subjects, objects = get_subjects_and_objects(info_combo) #use existing better and smaller methods?
     #decompose and look up values in currencies
     unknown = []
     knowns = []
