@@ -20,25 +20,20 @@ module Interpreter #responsible for understanding the type of input
     #seperate into subjects and objects
     subjects, objects = getSubjectsAndObjects(info_combo)
     #decompose and look up values in currencies
-    unknown = nil
+    unknown = []
+    knowns = []
     derived_value = "rand"
     subjects.each do |subject|
-      subject.split.map do |word|
-
-        Currencies::CURRENCY_MAPS.each do |hash|
-           if hash.keys.any? {|key| word.match(key)}
-             hash[word]
-           else
-             unknown = subject.delete(word)
-             p unknown
-
-           end
-        end
+      subject = subject.split.map! do |word|
+        word = replaceWithValueIfExists(word)
       end
+      knowns << subject
     end
+    p knowns
+    p subjects
     # do algebra for unknowns
-    Currencies.updateGivens(unknown,derived_value)
-    return getMentionedCurrencies(unknown)
+    # Currencies.updateGivens(unknown,derived_value)
+    # return getMentionedCurrencies(unknown)
   end
 
   def isInfo?(str)
@@ -60,6 +55,15 @@ module Interpreter #responsible for understanding the type of input
   end
 
   private
+
+  def replaceWithValueIfExists(word)
+    Currencies::CURRENCY_MAPS.each do |hash|
+      word = hash[word] if hash.keys.include?(word)
+          #replace the known key with its known value
+      #  p word
+    end
+    return word
+  end
 
   def getSubjectsAndObjects(info_combo)
     subjects, objects = [], []
