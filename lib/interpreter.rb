@@ -1,7 +1,7 @@
 require_relative './currencies.rb'
 
 module Interpreter #responsible for understanding the type of input
-  #order of checks should be: validInput? isQuery? isInfo?
+  #order of checks should be: valid_input? is_query? is_info?
 
   def getSubjectFromQueries(queries) #["query". "another query"]
     subjects = []
@@ -36,17 +36,17 @@ module Interpreter #responsible for understanding the type of input
     # return getMentionedCurrencies(unknown)
   end
 
-  def isInfo?(str)
+  def is_info?(str)
     hash_names = getMentionedCurrencies(str) # "glob is prok"
     return true if /is/.match(str) && currenciesMentionedAreFromDifferentMaps(hash_names)
     return false
   end
 
-  def isQuery?(str)
+  def is_query?(str)
     /how \b(many|much)\b/.match(str) ? true : false
   end
 
-  def validInput?(input_array)
+  def valid_input?(input_array)
     input_array.each do |word| #inclusive or for currency relevancy
       return false unless (Currencies::NUMERAL_GALAX.keys.include?(word) ||
       Currencies::ORE_CREDIT.keys.include?(word))
