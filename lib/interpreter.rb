@@ -1,7 +1,6 @@
 require_relative './currencies.rb'
 
 module Interpreter #responsible for understanding the type of input
-
   #order of checks should be: validInput? isQuery? isInfo?
 
   def getSubjectFromQueries(queries) #["query". "another query"]
@@ -22,7 +21,7 @@ module Interpreter #responsible for understanding the type of input
     #decompose and look up values in currencies
     unknown = []
     knowns = []
-    derived_value = "rand"
+    # derived_value = "rand"
     subjects.each do |subject|
       subject = subject.split.map! do |word|
         word = replaceWithValueIfExists(word)
@@ -31,6 +30,7 @@ module Interpreter #responsible for understanding the type of input
     end
     p knowns
     p subjects
+    p objects
     # do algebra for unknowns
     # Currencies.updateGivens(unknown,derived_value)
     # return getMentionedCurrencies(unknown)
@@ -60,7 +60,6 @@ module Interpreter #responsible for understanding the type of input
     Currencies::CURRENCY_MAPS.each do |hash|
       word = hash[word] if hash.keys.include?(word)
           #replace the known key with its known value
-      #  p word
     end
     return word
   end

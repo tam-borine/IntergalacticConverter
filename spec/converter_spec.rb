@@ -51,7 +51,6 @@ subject {described_class.new(text_file)}
     it "C can be subtracted from D and M only"
     it "V, L and D can never be subtracted"
 
-
   end
 
 

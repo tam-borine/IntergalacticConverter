@@ -16,6 +16,7 @@ include Currencies
   end
 
   private
+  #change correctLookUp name
   def correctLookUp(input_currency)
     romanValue = ""
     credits = 0
