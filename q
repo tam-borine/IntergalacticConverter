@@ -62,7 +62,7 @@ Date:   Mon Nov 14 10:23:23 2016 +0000
 Author: Tam <tamborinehands@gmail.com>
 Date:   Mon Nov 14 10:10:25 2016 +0000
 
-    extracted responsibility of updateGivens to Currencies plus test
+    extracted responsibility of update_givens to Currencies plus test
 
 [33mcommit 64c32b92192c43695349d87b4103eafe57cedf00[m
 Author: Tam <tamborinehands@gmail.com>
@@ -122,7 +122,7 @@ Date:   Sun Nov 13 17:22:36 2016 +0000
 Author: Tam <tamborinehands@gmail.com>
 Date:   Sun Nov 13 16:36:47 2016 +0000
 
-    failure undefined method updateGivens YAY FOR TDD
+    failure undefined method update_givens YAY FOR TDD
 
 [33mcommit 88c8f42902d8ed2b535c0ca1c2701f9c196c5947[m
 Author: Tam <tamborinehands@gmail.com>

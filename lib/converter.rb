@@ -8,20 +8,20 @@ include Currencies
     @info = argv_text_file
   end
 
-  def convert_to_credits(input_currency)#"glob prok silver"
-    raise "I have no idea what you are talking about" unless input_currency
-      input_currency = toArrayOfStrings(input_currency)
-      credits, multiplier = correctLookUp(input_currency)
+  def convert_to_credits(currency_to_convert)#"glob prok silver"
+    raise "I have no idea what you are talking about" unless currency_to_convert
+      currency_to_convert = toArrayOfStrings(currency_to_convert)
+      credits, multiplier = look_up_x_rates(currency_to_convert)
       return credits * (multiplier != 0 ? multiplier : 1)
   end
 
   private
-  #change correctLookUp name
-  def correctLookUp(input_currency)   
+
+  def look_up_x_rates(currency_to_convert)
     romanValue = ""
     credits = 0
     multiplier = 0
-    input_currency.each do |word| #[glob, prok, silver]
+    currency_to_convert.each do |word| #[glob, prok, silver]
       if Currencies::NUMERAL_GALAX.keys.include?(word)
         romanValue << Currencies::NUMERAL_GALAX[word]
         credits = roman_to_integer(romanValue)

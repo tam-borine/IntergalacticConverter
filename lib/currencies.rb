@@ -7,7 +7,7 @@ module Currencies #understands the translatory currency maps and how to update t
 
   CURRENCY_MAPS = [NUMERAL_GALAX, NUMERAL_CREDIT, ORE_CREDIT]
 
-  def self.updateGivens(key, value)
+  def self.update_givens(key, value)
     CURRENCY_MAPS.each do |hash|
       hash[key] = value if hash.keys.include?(key)
     end

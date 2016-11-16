@@ -3,28 +3,28 @@ require_relative './currencies.rb'
 module Interpreter #responsible for understanding the type of input
   #order of checks should be: valid_input? is_query? is_info?
 
-  def getSubjectFromQueries(queries) #["query". "another query"]
-    subjects = []
+  def get_currencies_to_convert_from_queries(queries) #["query". "another query"]
+    currencies_to_convert = []
     queries.each do |query|
       prefix = query[/(how )(many|much) /]
       query.slice!(prefix)
       query.chop! #this is uncool hacky way to remove  ? from str
       subjectsAndObjects = query.split("is")
-      subjects << subjectsAndObjects[1]
+      currencies_to_convert << subjectsAndObjects[1]
     end
-    return subjects
+    return currencies_to_convert
   end
 
-  def solveForUnknownInfo(info_combo)
+  def solve_for_unknown_info(info_combo)
     #seperate into subjects and objects
-    subjects, objects = getSubjectsAndObjects(info_combo)
+    subjects, objects = get_subjects_and_objects(info_combo)
     #decompose and look up values in currencies
     unknown = []
     knowns = []
     # derived_value = "rand"
     subjects.each do |subject|
       subject = subject.split.map! do |word|
-        word = replaceWithValueIfExists(word)
+        word = replace_with_value_if_exists(word)
       end
       knowns << subject
     end
@@ -32,13 +32,13 @@ module Interpreter #responsible for understanding the type of input
     p subjects
     p objects
     # do algebra for unknowns
-    # Currencies.updateGivens(unknown,derived_value)
-    # return getMentionedCurrencies(unknown)
+    # Currencies.update_givens(unknown,derived_value)
+    # return get_mentioned_currencies(unknown)
   end
 
   def is_info?(str)
-    hash_names = getMentionedCurrencies(str) # "glob is prok"
-    return true if /is/.match(str) && currenciesMentionedAreFromDifferentMaps(hash_names)
+    hash_names = get_mentioned_currencies(str) # "glob is prok"
+    return true if /is/.match(str) && different_currencies_mentioned?(hash_names)
     return false
   end
 
@@ -56,15 +56,14 @@ module Interpreter #responsible for understanding the type of input
 
   private
 
-  def replaceWithValueIfExists(word)
+  def replace_with_value_if_exists(word)
     Currencies::CURRENCY_MAPS.each do |hash|
-      word = hash[word] if hash.keys.include?(word)
-          #replace the known key with its known value
+      word = hash[word] if hash.keys.include?(word) #replace the known key with its known value
     end
     return word
   end
 
-  def getSubjectsAndObjects(info_combo)
+  def get_subjects_and_objects(info_combo)
     subjects, objects = [], []
     info_combo.each do |info_str|
       subjectsAndObjects = info_str.split(/\bis\b/)
@@ -74,15 +73,15 @@ module Interpreter #responsible for understanding the type of input
     return subjects, objects
   end
 
-  def getMentionedCurrencies(str)
+  def get_mentioned_currencies(str)
     hash_names = []
-    Currencies::CURRENCY_MAPS.each do |hash| hash_names << hash if hash.keys.any? {|key| str.match(key)}
+    Currencies::CURRENCY_MAPS.each do |hash|
+      hash_names << hash if hash.keys.any? {|key| str.match(key)}
     end
     return hash_names
   end
 
-  def currenciesMentionedAreFromDifferentMaps(hash_names)
-    # p hash_names
+  def different_currencies_mentioned?(hash_names)
     hash_names.uniq.length > 1
   end
 
