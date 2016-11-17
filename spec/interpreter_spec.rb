@@ -35,8 +35,8 @@ RSpec.describe Interpreter do
     end
 
     it "gets known values" do
-      compound_info = "pish pish Iron is 3910 Credits"
-      expect(interpreter.get_known_values(compound_info)).to eq [[1.0, 1.0, "Silver"], [10.0, 10.0, "Iron"], [1.0, 5.0, "Gold"]]
+      compound_subject = "pish pish Iron"
+      expect(interpreter.get_known_values(compound_subject)).to eq [10.0, 10.0, "Iron"]
     end
 
     it "does algebra" do
