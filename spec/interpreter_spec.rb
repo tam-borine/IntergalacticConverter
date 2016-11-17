@@ -44,10 +44,5 @@ RSpec.describe Interpreter do
       expect(interpreter.compound_info_to_equation(compound_info)).to eq "2.0 * Silver =  34 Credits"
     end
 
-    it "does algebra" do
-      pending "probably need to break this into a few smaller methods with more isolated responsibilities"
-      info_combo = ["glob glob Silver is 34 Credits","pish pish Iron is 3910 Credits","glob prok Gold is 57800 Credits"]
-      expect(interpreter.solve_for_unknown_info(info_combo)).to eq Currencies::ORE_CREDIT
-    end
 
 end

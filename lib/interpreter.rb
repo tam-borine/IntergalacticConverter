@@ -14,34 +14,12 @@ module Interpreter #responsible for understanding the type of input
     return currencies_to_convert
   end
 
-  def solve_for_unknown_info(info_combo)
-    #seperate into subjects and objects
-    subjects, objects = get_subjects_and_objects(info_combo) #use existing better and smaller methods?
-    #decompose and look up values in currencies
-    unknown = []
-    knowns = []
-    # derived_value = "rand"
-    subjects.each do |subject|
-      subject = subject.split.map! do |word|
-        # p subject
-        # p word
-        word = replace_with_value_if_exists(word)
-      end
-      knowns << subject
-    end
-    # p knowns
-    # p subjects
-    # p objects
-    # do algebra for unknowns
-    # Currencies.update_givens(unknown,derived_value)
-    # return get_mentioned_currencies(unknown)
-  end
-
   def compound_info_to_equation(compound_info, converter = Converter)
     object = get_substr_after_is(compound_info)
     subject = get_substr_before_is(compound_info)
     knowns, unknown = get_knowns_and_unknown(subject)
     known = Converter.new.convert_to_credits(knowns) # UGH!
+    # all we need to do algebra and find unknown val is object-credits / known
     "#{known} * #{unknown} = #{object}"
   end
 
@@ -93,14 +71,14 @@ module Interpreter #responsible for understanding the type of input
     false
   end
 
-  def replace_with_value_if_exists(word)
+  def replace_with_value_if_exists(word) #not using this, need it?
     Currencies::CURRENCY_MAPS.each do |hash|
       word = hash[word] if hash.keys.include?(word) #replace the known key with its known value
     end
     return word
   end
 
-  def get_subjects_and_objects(info_combo)
+  def get_subjects_and_objects(info_combo) #not using this, need it?
     subjects, objects = [], []
     info_combo.each do |info_str|
       subjects << get_substr_before_is(info_str)
