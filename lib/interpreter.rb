@@ -40,21 +40,16 @@ module Interpreter #responsible for understanding the type of input
   def compound_info_to_equation(compound_info, converter = Converter)
     object = get_substr_after_is(compound_info)
     subject = get_substr_before_is(compound_info)
-    knowns, unknown = get_known_values(subject)
-    known = Converter.new.convert_to_credits(knowns) # get this from converter, assume it works
+    knowns, unknown = get_knowns_and_unknown(subject)
+    known = Converter.new.convert_to_credits(knowns) # UGH!
     "#{known} * #{unknown} = #{object}"
   end
 
-  def get_known_values(compound_subject)
+  def get_knowns_and_unknown(compound_subject)
     knowns = []
-    unknown = ""
+    unknown = "" #assumes there is only one atm
     compound_subject.split.each do |word|
-      # word = replace_with_value_if_exists(word)
-      if recognised_unit?(word)
-        knowns << word
-      else
-        unknown = word
-      end
+    recognised_unit?(word) ? knowns << word : unknown = word
     end
     return knowns.join(" "), unknown
   end

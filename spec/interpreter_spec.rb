@@ -34,9 +34,9 @@ RSpec.describe Interpreter do
       expect(interpreter.get_currencies_to_convert_from_queries(query)).to eq [" glob prok Silver ", " glob prok Iron "]
     end
 
-    it "gets known values" do
+    it "gets known and unknown values" do
       compound_subject = "pish pish Iron"
-      expect(interpreter.get_known_values(compound_subject)).to eq [10.0, 10.0, "Iron"]
+      expect(interpreter.get_knowns_and_unknown(compound_subject)).to eq ["pish pish", "Iron"]
     end
 
     it "converts compound info into an equation" do
