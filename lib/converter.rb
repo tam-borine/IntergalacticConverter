@@ -4,7 +4,7 @@ class Converter
 include Currencies
 #show the algebra that gave these values
 
-  def initialize(argv_text_file)
+  def initialize(argv_text_file=nil)
     @info = argv_text_file
   end
 

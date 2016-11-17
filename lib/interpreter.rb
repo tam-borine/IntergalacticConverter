@@ -1,4 +1,5 @@
 require_relative './currencies.rb'
+require_relative './converter.rb'
 
 module Interpreter #responsible for understanding the type of input
   #order of checks should be: valid_input? is_query? is_info?
@@ -22,32 +23,40 @@ module Interpreter #responsible for understanding the type of input
     # derived_value = "rand"
     subjects.each do |subject|
       subject = subject.split.map! do |word|
-        p subject
-        p word
+        # p subject
+        # p word
         word = replace_with_value_if_exists(word)
       end
       knowns << subject
     end
-    p knowns
-    p subjects
-    p objects
+    # p knowns
+    # p subjects
+    # p objects
     # do algebra for unknowns
     # Currencies.update_givens(unknown,derived_value)
     # return get_mentioned_currencies(unknown)
   end
 
-  def compound_info_to_equation(compound_info)
-    compound_info = get_known_values(compound_info).join(" ")
+  def compound_info_to_equation(compound_info, converter = Converter)
     object = get_substr_after_is(compound_info)
     subject = get_substr_before_is(compound_info)
-    subject + "=" + object
+    knowns, unknown = get_known_values(subject)
+    known = Converter.new.convert_to_credits(knowns) # get this from converter, assume it works
+    "#{known} * #{unknown} = #{object}"
   end
 
   def get_known_values(compound_subject)
-    compound_subject = compound_subject.split.map! do |word|
-      word = replace_with_value_if_exists(word)
+    knowns = []
+    unknown = ""
+    compound_subject.split.each do |word|
+      # word = replace_with_value_if_exists(word)
+      if recognised_unit?(word)
+        knowns << word
+      else
+        unknown = word
+      end
     end
-    compound_subject
+    return knowns.join(" "), unknown
   end
 
   def is_info?(str)
@@ -82,6 +91,13 @@ module Interpreter #responsible for understanding the type of input
     str.split(/\bis\b/)[1]
   end
 
+  def recognised_unit?(word)
+      Currencies::CURRENCY_MAPS.each do |hash|
+        return true if hash.keys.include?(word)
+      end
+    false
+  end
+
   def replace_with_value_if_exists(word)
     Currencies::CURRENCY_MAPS.each do |hash|
       word = hash[word] if hash.keys.include?(word) #replace the known key with its known value
@@ -97,6 +113,7 @@ module Interpreter #responsible for understanding the type of input
     end
     return subjects, objects
   end
+
 
   def get_mentioned_currencies(str)
     hash_names = []
