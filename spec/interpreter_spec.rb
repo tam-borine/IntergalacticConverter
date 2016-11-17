@@ -34,6 +34,11 @@ RSpec.describe Interpreter do
       expect(interpreter.get_currencies_to_convert_from_queries(query)).to eq [" glob prok Silver ", " glob prok Iron "]
     end
 
+    it "gets known values" do
+      compound_info = "pish pish Iron is 3910 Credits"
+      expect(interpreter.get_known_values(compound_info)).to eq [[1.0, 1.0, "Silver"], [10.0, 10.0, "Iron"], [1.0, 5.0, "Gold"]]
+    end
+
     it "does algebra" do
       pending "probably need to break this into a few smaller methods with more isolated responsibilities"
       info_combo = ["glob glob Silver is 34 Credits","pish pish Iron is 3910 Credits","glob prok Gold is 57800 Credits"]

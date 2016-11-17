@@ -28,12 +28,15 @@ module Interpreter #responsible for understanding the type of input
       end
       knowns << subject
     end
-    # p knowns
-    # p subjects
-    # p objects
+    p knowns
+    p subjects
+    p objects
     # do algebra for unknowns
     # Currencies.update_givens(unknown,derived_value)
     # return get_mentioned_currencies(unknown)
+  end
+
+  def get_known_values(compound_info)
   end
 
   def is_info?(str)
