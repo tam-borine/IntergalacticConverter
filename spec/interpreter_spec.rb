@@ -39,6 +39,11 @@ RSpec.describe Interpreter do
       expect(interpreter.get_known_values(compound_subject)).to eq [10.0, 10.0, "Iron"]
     end
 
+    it "converts compound info into an equation" do
+      compound_info = "glob glob Silver is 34 Credits"
+      expect(interpreter.compound_info_to_equation(compound_info)).to eq "(1 + 1) * silver = 34"
+    end
+
     it "does algebra" do
       pending "probably need to break this into a few smaller methods with more isolated responsibilities"
       info_combo = ["glob glob Silver is 34 Credits","pish pish Iron is 3910 Credits","glob prok Gold is 57800 Credits"]

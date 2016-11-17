@@ -36,6 +36,13 @@ module Interpreter #responsible for understanding the type of input
     # return get_mentioned_currencies(unknown)
   end
 
+  def compound_info_to_equation(compound_info)
+    compound_info = get_known_values(compound_info).join(" ")
+    object = get_substr_after_is(compound_info)
+    subject = get_substr_before_is(compound_info)
+    subject + "=" + object
+  end
+
   def get_known_values(compound_subject)
     compound_subject = compound_subject.split.map! do |word|
       word = replace_with_value_if_exists(word)
